@@ -36,3 +36,50 @@ function sameRefactored(arr1, arr2) {
     }
     return true
 }
+
+// for two strings, determine if they're anagrams (same length, same letters, same frequency)
+function isAnagram(s1, s2) {
+    if (s1 === "" && s2 === s1) {
+        return true
+    } else if (s1.length !== s2.length) {
+        return false
+    }
+    let freqCount1 = {}
+    let freqCount2 = {}
+    for (let char of s1) {
+        freqCount1[char] = (freqCount1[char] || 0) + 1
+    }
+    for (let char of s2) {
+        freqCount2[char] = (freqCount2[char] || 0) + 1
+    }
+    for (let key in freqCount1) {
+        if (!(key in freqCount2)) {
+            return false
+        }
+        if (freqCount1[key] !== freqCount2[key]) {
+            return false
+        }
+    }
+    return true
+}
+
+function anotherIsAnagram(s1, s2) {
+    if (s1.length !== s2.length) {
+        return false
+    }
+
+    const lookup = {}
+    for (let i = 0; i < s1.length; i++) {
+        let letter = s1[i]
+        lookup[letter] ? lookup[letter] += 1 : lookup[letter] = 1
+    }
+    for (let i = 0; i < s2.length; i++) {
+        let letter = s1[i]
+        if (!lookup[letter]) {
+            return false
+        } else {
+            lookup[letter] -= 1
+        }
+    }
+    return true
+}
