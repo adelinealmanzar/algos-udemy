@@ -107,4 +107,20 @@ function recursiveRange(num) {
     return num + recursiveRange(num-1)
 }
 
-console.log(recursiveRange(10))
+function averagePair(arr, tar) {
+    let left = 0
+    let right = arr.length - 1
+    while (left < right) {
+        if ((arr[left] + arr[right])/2 === tar) {
+            return true
+        } else if ((arr[left] + arr[right])/2 < tar) {
+            left++
+        } else if ((arr[left] + arr[right])/2 > tar) {
+            right--
+        }
+    }
+    return false
+}
+console.log(averagePair([1,2,3], 2.5)) //true
+console.log(averagePair([1,2,3], 5)) //false
+console.log(averagePair([1,3,3,5,6,7,10,12,19], 8)) //true
