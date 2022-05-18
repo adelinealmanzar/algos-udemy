@@ -83,3 +83,21 @@ function factorial(num) {
     if (num === 0) return 1
     return num * factorial(num-1)
 }
+
+function sameFrequency(num1, num2) {
+    if (num1.length !== num2.length) return false
+    const arr1 = num1.toString().split('').sort().join('')
+    const arr2 = num2.toString().split('').sort().join('')
+    return arr1 === arr2
+}
+
+function areThereDuplicates() {
+    const obj = {}
+    for (let val of arguments) {
+        obj[val] = ++obj[val] || 1
+    }
+    for (let key of Object.keys(obj)) {
+        if (obj[key] > 1) return true
+    }
+    return false
+}
