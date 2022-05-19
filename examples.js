@@ -110,3 +110,19 @@ function countUniqueValues(arr) {
     }
     return i + 1
 }
+
+function isSubsequence(s1, s2) {
+    let resultS = ""
+
+    let i = 0
+    for (let j = 0; j < s2.length; j++) {
+        if (s1[i] === s2[j]) {
+            resultS += s2[j]
+            i++
+        }
+    }
+    return resultS === s1
+}
+
+console.log(isSubsequence('sing', 'sting'))
+console.log(isSubsequence('abc', 'acb'))
