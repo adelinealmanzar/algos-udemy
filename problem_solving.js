@@ -121,6 +121,22 @@ function averagePair(arr, tar) {
     }
     return false
 }
-console.log(averagePair([1,2,3], 2.5)) //true
-console.log(averagePair([1,2,3], 5)) //false
-console.log(averagePair([1,3,3,5,6,7,10,12,19], 8)) //true
+
+function binarySearch(arr, val) {
+	let left = 0
+	let right = arr.length
+    let middle = Math.floor((left + right)/2)
+
+	while (arr[middle] !== val && left < right) {
+		if (val > arr[middle]) {
+			left = middle + 1
+		} else if (val < arr[middle]) {
+			right = middle - 1
+	    }
+        middle = Math.floor((left + right)/2)
+    }
+    return arr[middle] === val ? middle : -1
+}
+
+console.log(binarySearch([2, 5, 6, 7], 6))
+console.log(binarySearch([1, 2, 3, 4, 5], 2))
