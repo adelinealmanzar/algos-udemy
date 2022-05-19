@@ -37,3 +37,106 @@ function isAlphaNumeric(char) {
     }
     return true
 }
+
+function maxSubArraySum(arr, num) {
+    let maxSum = 0
+    let tempSum = 0
+    if (arr.length < num) return null
+    for (let i = 0; i < num; i++) {
+        maxSum += arr[i]
+    }
+    tempSum = maxSum
+    for (let i = num; i < arr.length; i++) {
+        tempSum = tempSum - arr[i - num] + arr[i]
+        maxSum = Math.max(maxSum, tempSum)
+    }
+    return maxSum
+}
+
+function search(arr, val) {
+    let min = 0
+    let max = arr.length - 1
+
+    while (min <= max) {
+        let middle = Math.floor((min + max) / 2)
+        let currentEl = arr[middle]
+
+        if (currentEl < val) {
+            min = middle + 1
+        }
+        else if (currentEl > val) {
+            max = middle - 1
+        }
+        else {
+            return middle
+        }
+    }
+    return -1
+}
+
+function power(base, exp) {
+    if (exp === 0) return 1
+    return base * power(base, exp-1)
+}
+
+function factorial(num) {
+    if (num === 0) return 1
+    return num * factorial(num-1)
+}
+
+function sameFrequency(num1, num2) {
+    if (num1.length !== num2.length) return false
+    const arr1 = num1.toString().split('').sort().join('')
+    const arr2 = num2.toString().split('').sort().join('')
+    return arr1 === arr2
+}
+
+function areThereDuplicates() {
+    const obj = {}
+    for (let val of arguments) {
+        obj[val] = ++obj[val] || 1
+    }
+    for (let key of Object.keys(obj)) {
+        if (obj[key] > 1) return true
+    }
+    return false
+}
+
+function recursiveRange(num) {
+    if (num === 1) return 1
+    return num + recursiveRange(num-1)
+}
+
+function averagePair(arr, tar) {
+    let left = 0
+    let right = arr.length - 1
+    while (left < right) {
+        if ((arr[left] + arr[right])/2 === tar) {
+            return true
+        } else if ((arr[left] + arr[right])/2 < tar) {
+            left++
+        } else if ((arr[left] + arr[right])/2 > tar) {
+            right--
+        }
+    }
+    return false
+}
+
+function binarySearch(arr, val) {
+	let left = 0
+	let right = arr.length
+    let middle = Math.floor((left + right)/2)
+
+	while (arr[middle] !== val && left < right) {
+		if (val > arr[middle]) {
+			left = middle + 1
+		} else if (val < arr[middle]) {
+			right = middle - 1
+	    }
+        middle = Math.floor((left + right)/2)
+    }
+    return arr[middle] === val ? middle : -1
+}
+
+console.log(binarySearch([2, 5, 6, 7], 6))
+console.log(binarySearch([1, 2, 3, 4, 5], 2))
