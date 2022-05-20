@@ -124,5 +124,8 @@ function isSubsequence(s1, s2) {
     return resultS === s1
 }
 
-console.log(isSubsequence('sing', 'sting'))
-console.log(isSubsequence('abc', 'acb'))
+function maxSubArraySum(arr, subL) {
+    
+}
+
+console.log(maxSubArraySum([-3, 4, 0, -2, 6, -1], 2)) //5

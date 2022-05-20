@@ -138,5 +138,26 @@ function binarySearch(arr, val) {
     return arr[middle] === val ? middle : -1
 }
 
-console.log(binarySearch([2, 5, 6, 7], 6))
-console.log(binarySearch([1, 2, 3, 4, 5], 2))
+function findNumber(arr, k) {
+    for (let char of arr) {
+        if (char === k) return 'YES'
+    }
+    return 'NO'
+}
+
+function oddNumbers(l, r) {
+    let resultArr = []
+    while (l <= r) {
+        if (l % 2 === 0) {
+            l += 1
+        } else {
+            resultArr.push(l)
+            l += 2
+        }
+    }
+    return resultArr
+}
+
+console.log(oddNumbers(2, 9))
+// console.log(binarySearch([2, 5, 6, 7], 6))
+// console.log(binarySearch([1, 2, 3, 4, 5], 2))
