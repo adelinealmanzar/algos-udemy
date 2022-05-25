@@ -158,6 +158,33 @@ function oddNumbers(l, r) {
     return resultArr
 }
 
-console.log(oddNumbers(2, 9))
-// console.log(binarySearch([2, 5, 6, 7], 6))
-// console.log(binarySearch([1, 2, 3, 4, 5], 2))
+
+function findMaximum(arr, m) {
+    let maxDiff = 0
+    let tempDiff = 0
+    if (arr.length < m) return null
+    for (let i = 0; i < m; i++) {
+        maxDiff += arr[i]
+    }
+    tempDiff = maxDiff
+    for (let i = m; i < arr.length; i++) {
+        console.log('max', maxDiff)
+        console.log('temp', tempDiff)
+        tempDiff = tempDiff - arr[i - m]
+        console.log(tempDiff)
+        maxDiff = Math.max(maxDiff, tempDiff)
+    }
+    return maxDiff
+}
+
+console.log(findMaximum([1,2,4,5,8], 3))
+
+    //Brute Force Approach
+    // declare object var (will have key = a[i] and values = [] of abs values greater than d)
+    // loop through a to make object var
+    // loop through a and then loop through b (but O(N^2) runtime)
+    // if Math.abs(a[i] - a[j]) > d push to arrays within object values
+    
+    // loop through object keys for if value(array).length is equal to a.length to return object key
+
+
