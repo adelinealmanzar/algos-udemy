@@ -1,3 +1,39 @@
+//Merge Sort
+function merge(arr1, arr2) {
+	let results = []
+	let i = 0
+	let j = 0
+	// will exaust our condition if one arr is shorter than anohtr
+	while (i < arr1.length && j < arr2.length) {
+		if (arr2[j] > arr1[i]){
+			results.push(arr1[i]) // push smaller num
+			i++
+		} else {
+			results.push(arr2[j])
+			j++
+		}
+	}
+	// so need a condition for each arr length for the remainder of each arr
+	while (i < arr1.length) {
+		results.push(arr1[i])
+		i++
+	}
+
+	while (j < arr2.length) {
+		results.push(arr2[j])
+		j++
+	}
+	return results
+}
+
+function mergeSort(arr) {
+	if (arr.length <= 1) return arr //to exit recursion loop
+	let mid = Math.floor(arr.length/2)
+	let left = mergeSort(arr.slice(0, mid))
+	let right = mergeSort(arr.slice(mid)) // with no second argument, defaults to the end of the arr
+	return marge(left, right)
+}
+
 // Quick Sort
 function pivot(arr, start=0, end=arr.length+1) {
 	function swap(array, i, j) {
