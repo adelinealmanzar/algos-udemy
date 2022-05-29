@@ -242,12 +242,29 @@ class DoublyLinkedList {
 		}
 		return false
 	}
+
+	insert(index, val) {
+		if (index < 0 || index >= this.length) return false
+		if (index === 0) return !!this.unshift(val)
+		if (index === this.length || this.length === 0) return !!this.push(val)
+
+		const newNode = new DoublyNode(val)
+		const foundNode = this.get(index)
+
+		newNode.previous = foundNode.previous
+		foundNode.previous.next = newNode
+		foundNode.previous = newNode
+		newNode.next = foundNode
+
+		this.length += 1
+		return true
+	}
+
+
 }
 
-// const dLL = new DoublyLinkedList
-// dLL.push(1) // 0
-// dLL.push(2) // 1
-// dLL.push(3) // 2 
-// dLL.push(4) // 3
-// dLL.set(2, 10)
-// console.log(dLL.get(2))
+const dLL = new DoublyLinkedList
+dLL.push(1) // 0
+dLL.push(2) // 1
+dLL.push(3) // 2 
+dLL.push(4) // 3
