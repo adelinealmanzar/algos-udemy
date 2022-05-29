@@ -24,6 +24,7 @@ class SinglyLinkedList {
 			this.tail = newNode
 		}
 		this.length += 1
+		return this
 	}
 
 	pop() {
@@ -89,6 +90,20 @@ class SinglyLinkedList {
 			return true
 		}
 		return false
+	}
+
+	insert(index, val) {
+		if (index < 0 || index > this.length) return false
+		if (index === this.length) return !!this.push(val)
+		if (index === 0) return !!this.unshift(val)
+		
+		let newNode = new Node(val)
+		let priorNode = this.get(index - 1)
+		let nextNode = priorNode.next
+		priorNode.next = newNode
+		newNode.next = nextNode
+		this.length += 1
+		return true
 	}
 }
 
