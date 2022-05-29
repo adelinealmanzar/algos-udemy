@@ -232,6 +232,16 @@ class DoublyLinkedList {
 			}
 		}
 	}
+
+	set(index, val) {
+		let foundNode = this.get(index)
+
+		if (foundNode) {
+			foundNode.val = val
+			return true
+		}
+		return false
+	}
 }
 
 // const dLL = new DoublyLinkedList
@@ -239,4 +249,5 @@ class DoublyLinkedList {
 // dLL.push(2) // 1
 // dLL.push(3) // 2 
 // dLL.push(4) // 3
-// console.log(dLL.get(-1))
+// dLL.set(2, 10)
+// console.log(dLL.get(2))
