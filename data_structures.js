@@ -25,11 +25,32 @@ class SinglyLinkedList {
 		}
 		this.length += 1
 	}
-	
+
+	pop() {
+		if (!this.head) return undefined
+
+		let current = this.head
+		let newTail = current
+		while (this.next) {
+			newTail = current
+			current = current.next
+		}
+		this.tail = newTail
+		this.tail.next = null
+		this.length -= 1
+
+		if (this.length === 0) {
+			this.head = null
+			this.tail = null
+		}
+		return current
+	}	
 }
 
-// const first = new Node('hi')
-// first.next = new Node('there')
+const first = new Node('hi')
+first.next = new Node('there')
 
-// const list = new SinglyLinkedList()
-// list.push('hello')
+const list = new SinglyLinkedList()
+list.push('hello')
+list.push('there')
+console.log(list.pop())
