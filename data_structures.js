@@ -213,4 +213,30 @@ class DoublyLinkedList {
 		this.length += 1
 		return this
 	}
+
+	get(index) {
+		if (index < 0 || index >= this.length) return null
+		const mid = Math.floor(this.length/2)
+		let current
+		if (index <= this.length/2) {
+			current = this.head
+			for (let i = 0; i <= mid; i++) {
+				if (i === index) return current
+				current = current.next
+			}
+		} else {
+			current = this.tail
+			for (let i = this.length - 1; i > mid; i--) {
+				if (i === index) return current
+				current = current.previous
+			}
+		}
+	}
 }
+
+// const dLL = new DoublyLinkedList
+// dLL.push(1) // 0
+// dLL.push(2) // 1
+// dLL.push(3) // 2 
+// dLL.push(4) // 3
+// console.log(dLL.get(-1))
