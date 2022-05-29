@@ -1,6 +1,6 @@
 // Singly Linked List
 
-class Node {
+class SinglySinglyNode {
 	constructor(val) {
 		this.val = val
 		this.next = null
@@ -15,13 +15,13 @@ class SinglyLinkedList {
 	}
 
 	push(val) {
-		const newNode = new Node(val)
+		const newSinglyNode = new SinglyNode(val)
 		if (!this.head) {
-			this.head = newNode
+			this.head = newSinglyNode
 			this.tail = this.head
 		} else {
-			this.tail.next = newNode
-			this.tail = newNode
+			this.tail.next = newSinglyNode
+			this.tail = newSinglyNode
 		}
 		this.length += 1
 		return this
@@ -59,13 +59,13 @@ class SinglyLinkedList {
 	}
 
 	unshift(val) {
-		const newNode = new Node(val)
+		const newSinglyNode = new SinglyNode(val)
 		if (this.length === 0) {
-			this.head = newNode
+			this.head = newSinglyNode
 			this.tail = this.head
 		} else {
-			newNode.next = this.head
-			this.head = newNode
+			newSinglyNode.next = this.head
+			this.head = newSinglyNode
 		}
 
 		this.length += 1
@@ -84,9 +84,9 @@ class SinglyLinkedList {
 	}
 
 	set(index, val) {
-		let foundNode = this.get(index)
-		if (foundNode) {
-			foundNode.val = val
+		let foundSinglyNode = this.get(index)
+		if (foundSinglyNode) {
+			foundSinglyNode.val = val
 			return true
 		}
 		return false
@@ -97,11 +97,11 @@ class SinglyLinkedList {
 		if (index === this.length) return !!this.push(val)
 		if (index === 0) return !!this.unshift(val)
 
-		let newNode = new Node(val)
-		let priorNode = this.get(index - 1)
-		let nextNode = priorNode.next
-		priorNode.next = newNode
-		newNode.next = nextNode
+		let newSinglyNode = new SinglyNode(val)
+		let priorSinglyNode = this.get(index - 1)
+		let nextSinglyNode = priorSinglyNode.next
+		priorSinglyNode.next = newSinglyNode
+		newSinglyNode.next = nextSinglyNode
 		this.length += 1
 		return true
 	}
@@ -111,34 +111,58 @@ class SinglyLinkedList {
 		if (index === this.length - 1) return this.pop()
 		if (index === 0) return this.shift()
 
-		const prevNode = this.get(index - 1)
-		const removed = prevNode.next
-		prevNode.next = removed.next
+		const prevSinglyNode = this.get(index - 1)
+		const removed = prevSinglyNode.next
+		prevSinglyNode.next = removed.next
 		this.length -= 1
 		return removed
 	}
 
 	reverse() {
-		let node = this.head
+		let SinglyNode = this.head
 		this.head = this.tail //13
-		this.tail = node
+		this.tail = SinglyNode
 		let next
 		let prev = null
 		for (let i = 0; i < this.length; i++) {
-			next = node.next
-			node.next = prev
-			prev = node
-			node = next
+			next = SinglyNode.next
+			SinglyNode.next = prev
+			prev = SinglyNode
+			SinglyNode = next
 		}
 		return this
 	}
 }
 
-const first = new Node('hi')
-first.next = new Node('there')
+// Doubly Linked Lists
+class DoublyNode() {
+	constructor(val) {
+		this.val = val
+		this.next = null
+		this.previous = null
+	}
+}
 
-const list = new SinglyLinkedList()
-list.push('hello')
-list.push('there')
-console.log(list.pop())
-console.log(list.unshift('hi'))
+class DoublyLinkedList() {
+	constructor() {
+		this.head = null
+		this.tail = null
+		this.length = 0
+	}
+
+	push(val) {
+		const newNode = new DoublyNode(val)
+		if (!this.head) {
+			this.head = newNode
+			this.tail = newNode
+		} else {
+			this.tail.next = newNode
+			newNode.previous = this.tail
+			this.tail = newNode
+		}
+		length += 1
+		return this
+	}
+
+	
+}
