@@ -160,7 +160,7 @@ class DoublyLinkedList {
 			newNode.previous = this.tail
 			this.tail = newNode
 		}
-		length += 1
+		this.length += 1
 		return this
 	}
 
@@ -177,7 +177,40 @@ class DoublyLinkedList {
 			this.tail.next = null
 			previousTail.previous = null
 		}
-		length -= 1
+		this.length -= 1
 		return previousTail
+	}
+
+	shift() {
+		if (this.length === 0) return undefined
+
+		const previousHead = this.head
+		if (this.length === 1) {
+			this.tail = null
+			this.head = null
+		} else {
+			this.head = previousHead.next
+			this.head.previous = null
+			previousHead.next = null
+		}
+		this.length -= 1
+		return previousHead
+	}
+
+	unshift(val) {
+		const newNode = new SinglyNode(val)
+
+		const previousHead = this.head
+		if (this.length === 0) {
+			this.head = newNode
+			this.tail = newNode
+		} else {
+			previousHead.previous = newNode
+			newNode.next = previousHead
+			this.head = newNode
+		}
+
+		this.length += 1
+		return this
 	}
 }
