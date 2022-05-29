@@ -260,6 +260,25 @@ class DoublyLinkedList {
 		return true
 	}
 
+	remove(index) {
+		if (index < 0 || index >= this.length) return undefined
+		if (index === 0) return this.shift()
+		if (index === this.length - 1 ) return this.pop()
+
+		const foundNode = this.get(index)
+		const beforeNode = foundNode.previous
+		const afterNode = foundNode.next
+
+		beforeNode.next = afterNode
+		afterNode.previous = beforeNode
+
+		foundNode.next = null
+		foundNode.previous = null
+
+		length -= 1
+		return foundNode
+
+	}
 
 }
 
