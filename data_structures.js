@@ -50,7 +50,6 @@ class SinglyLinkedList {
 		if (this.length === 0) return undefined
 		let prevHead = this.head
 		this.head = prevHead.next
-		prevHead.next = null
 		this.length -= 1
 		if (this.length === 0) {
 			this.tail = null
@@ -58,6 +57,19 @@ class SinglyLinkedList {
 		return prevHead
 	}
 
+	unshift(val) {
+		const newNode = new Node(val)
+		if (this.length === 0) {
+			this.head = newNode
+			this.tail = this.head
+		} else {
+			newNode.next = this.head
+			this.head = newNode
+		}
+
+		this.length += 1
+		return this
+	}
 }
 
 const first = new Node('hi')
@@ -67,3 +79,4 @@ const list = new SinglyLinkedList()
 list.push('hello')
 list.push('there')
 console.log(list.pop())
+console.log(list.unshift('hi'))
