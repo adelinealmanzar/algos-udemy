@@ -135,7 +135,7 @@ class SinglyLinkedList {
 }
 
 // Doubly Linked Lists
-class DoublyNode() {
+class DoublyNode {
 	constructor(val) {
 		this.val = val
 		this.next = null
@@ -143,7 +143,7 @@ class DoublyNode() {
 	}
 }
 
-class DoublyLinkedList() {
+class DoublyLinkedList {
 	constructor() {
 		this.head = null
 		this.tail = null
@@ -164,5 +164,20 @@ class DoublyLinkedList() {
 		return this
 	}
 
-	
+	pop() {
+		if (this.length === 0) return undefined
+
+		const previousTail = this.tail
+
+		if (this.length === 1) {
+			this.tail = null
+			this.head = null
+		} else {
+			this.tail = previousTail.previous
+			this.tail.next = null
+			previousTail.previous = null
+		}
+		length -= 1
+		return previousTail
+	}
 }
