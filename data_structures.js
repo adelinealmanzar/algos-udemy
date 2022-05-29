@@ -44,7 +44,20 @@ class SinglyLinkedList {
 			this.tail = null
 		}
 		return current
-	}	
+	}
+	
+	shift() {
+		if (this.length === 0) return undefined
+		let prevHead = this.head
+		this.head = prevHead.next
+		prevHead.next = null
+		this.length -= 1
+		if (this.length === 0) {
+			this.tail = null
+		}
+		return prevHead
+	}
+
 }
 
 const first = new Node('hi')
