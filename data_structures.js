@@ -1,5 +1,7 @@
 // Singly Linked List
 
+const { isValidElement } = require("react/cjs/react.production.min")
+
 class SinglySinglyNode {
 	constructor(val) {
 		this.val = val
@@ -294,7 +296,7 @@ class Stack {
 		this.last = null
 		this.size = 0
 	}
-	// add to end
+	// add to beginning
 	push(val) {
 		const newNode = newNode(val)
 		if (!this.first) {
@@ -307,7 +309,7 @@ class Stack {
 		}
 		return this.size += 1
 	}
-	// remove from end
+	// remove from beginning
 	pop() {
 		let removed = this.first
 		if (!this.first) return null
@@ -317,7 +319,7 @@ class Stack {
 		} else {
 			this.first = removed.next
 		}
-		size -= 1
+		this.size -= 1
 		return removed.val
 	}
 }
@@ -358,10 +360,54 @@ class Queue {
 
 		const prevFirst = this.first
 		this.first = prevFirst.next
-		size -= 1
+		this.size -= 1
 		return prevFirst.val
 	}
+}
 
+// Binary Search Tree
+class BinaryNode {
+	constructor(val) {
+		this.val = val
+		this.left = null
+		this.right = null
+	}
+}
+
+class BinarySearchTree {
+	constructor() {
+		this.root = null
+	}
+
+	insert(val) {
+		const newNode = new BinaryNode(val)
+		let current = this.root
+
+		if (!this.root) {
+			this.root = newNode
+			return this
+		}
+		while (true) {
+			if (val === current.val) return undefined
+			if (val < current.val) {
+				// check if left exists
+				if (!current.left) {
+					current.left = newNode
+					return this
+				} else {
+					current = current.left
+				}
+			} else if (val > current.val) {
+				// check if right exists
+				if (!current.right) {
+					current.right = newNode
+					return this
+				} else {
+					current = current.right
+				}
+			}
+		}
+	}
 }
 
 
