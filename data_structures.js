@@ -294,20 +294,20 @@ class Stack {
 		this.last = null
 		this.size = 0
 	}
-
+	// add to end
 	push(val) {
 		const newNode = newNode(val)
 		if (!this.first) {
 			this.first = newNode
 			this.last = newNode
 		} else {
-			let current = this.first
+			let prevFirst = this.first
 			this.first = newNode
-			newNode.next = current
+			newNode.next = prevFirst
 		}
 		return this.size += 1
 	}
-
+	// remove from end
 	pop() {
 		let removed = this.first
 		if (!this.first) return null
@@ -320,6 +320,48 @@ class Stack {
 		size -= 1
 		return removed.val
 	}
+}
+
+// Queue
+
+class QueueNode {
+	constructor(val) {
+		this.val = val
+		this.next = null
+	}
+}
+
+class Queue {
+	constructor() {
+		this.first = null
+		this.last = null
+		this.size = 0
+	}
+
+	// add to end
+	enqueue(val) {
+		const newNode = new QueueNode(val)
+		if (!this.first) {
+			this.first = newNode
+			this.last = newNode
+		} else {
+			this.last.next = newNode
+			this.last = newNode
+		}
+		
+		return this.size += 1
+	}
+
+	// remove from beginning
+	dequeue() {
+		if (!this.first) return null
+
+		const prevFirst = this.first
+		this.first = prevFirst.next
+		size -= 1
+		return prevFirst.val
+	}
+
 }
 
 
