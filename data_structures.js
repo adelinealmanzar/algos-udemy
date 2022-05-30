@@ -279,11 +279,47 @@ class DoublyLinkedList {
 		return foundNode
 
 	}
-
 }
 
-const dLL = new DoublyLinkedList
-dLL.push(1) // 0
-dLL.push(2) // 1
-dLL.push(3) // 2 
-dLL.push(4) // 3
+// Stack
+class StackNode {
+	constructor(val) {
+		this.val = val
+		this.next = null
+	}
+}
+class Stack {
+	constructor() {
+		this.first = null
+		this.last = null
+		this.size = 0
+	}
+
+	push(val) {
+		const newNode = newNode(val)
+		if (!this.first) {
+			this.first = newNode
+			this.last = newNode
+		} else {
+			let current = this.first
+			this.first = newNode
+			newNode.next = current
+		}
+		return this.size += 1
+	}
+
+	pop() {
+		let removed = this.first
+		if (!this.first) return null
+		if (this.size === 1) {
+			this.first = null
+			this.last = null
+		} else {
+			this.first = removed.next
+		}
+		size -= 1
+		return removed.val
+	}
+}
+
+
