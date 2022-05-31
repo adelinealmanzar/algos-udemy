@@ -1,5 +1,7 @@
 // Singly Linked List
 
+const { isValidElement } = require("react/cjs/react.production.min")
+
 class SinglySinglyNode {
 	constructor(val) {
 		this.val = val
@@ -279,11 +281,150 @@ class DoublyLinkedList {
 		return foundNode
 
 	}
-
 }
 
-const dLL = new DoublyLinkedList
-dLL.push(1) // 0
-dLL.push(2) // 1
-dLL.push(3) // 2 
-dLL.push(4) // 3
+// Stack
+class StackNode {
+	constructor(val) {
+		this.val = val
+		this.next = null
+	}
+}
+class Stack {
+	constructor() {
+		this.first = null
+		this.last = null
+		this.size = 0
+	}
+	// add to beginning
+	push(val) {
+		const newNode = newNode(val)
+		if (!this.first) {
+			this.first = newNode
+			this.last = newNode
+		} else {
+			let prevFirst = this.first
+			this.first = newNode
+			newNode.next = prevFirst
+		}
+		return this.size += 1
+	}
+	// remove from beginning
+	pop() {
+		let removed = this.first
+		if (!this.first) return null
+		if (this.size === 1) {
+			this.first = null
+			this.last = null
+		} else {
+			this.first = removed.next
+		}
+		this.size -= 1
+		return removed.val
+	}
+}
+
+// Queue
+
+class QueueNode {
+	constructor(val) {
+		this.val = val
+		this.next = null
+	}
+}
+
+class Queue {
+	constructor() {
+		this.first = null
+		this.last = null
+		this.size = 0
+	}
+
+	// add to end
+	enqueue(val) {
+		const newNode = new QueueNode(val)
+		if (!this.first) {
+			this.first = newNode
+			this.last = newNode
+		} else {
+			this.last.next = newNode
+			this.last = newNode
+		}
+		
+		return this.size += 1
+	}
+
+	// remove from beginning
+	dequeue() {
+		if (!this.first) return null
+
+		const prevFirst = this.first
+		this.first = prevFirst.next
+		this.size -= 1
+		return prevFirst.val
+	}
+}
+
+// Binary Search Tree
+class BinaryNode {
+	constructor(val) {
+		this.val = val
+		this.left = null
+		this.right = null
+	}
+}
+
+class BinarySearchTree {
+	constructor() {
+		this.root = null
+	}
+
+	insert(val) {
+		const newNode = new BinaryNode(val)
+		let current = this.root
+
+		if (!this.root) {
+			this.root = newNode
+			return this
+		}
+		while (true) {
+			if (val === current.val) return undefined
+			if (val < current.val) {
+				// check if left exists
+				if (!current.left) {
+					current.left = newNode
+					return this
+				} else {
+					current = current.left
+				}
+			} else if (val > current.val) {
+				// check if right exists
+				if (!current.right) {
+					current.right = newNode
+					return this
+				} else {
+					current = current.right
+				}
+			}
+		}
+	}
+
+	find(val) {
+		if (!this.root) return false
+
+		let current = this.root
+		let found = false
+		while (current && !found) {
+			if (val < current.val) {
+				current = current.left
+			} else if (val > current.val) {
+				current = current.right
+			} else {
+				found = true
+			}
+		}
+		return found
+	}
+}
+
+
