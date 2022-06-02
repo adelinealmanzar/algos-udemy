@@ -442,6 +442,50 @@ class BinarySearchTree {
 
 		return visited
 	}
+
+	//DFS
+	preOrder() {
+		let visited = []
+		let current = this.root
+
+		function traverse(node) {
+			visited.push(node.val)
+			if (node.left) traverse(node.left)
+			if (node.right) traverse(node.right)
+		}
+		
+		traverse(current)
+		return visited
+	}
+
+	postOrder() {
+		let visited = []
+		let current = this.root
+
+		function traverse(node) {
+			if (node.left) traverse(node.left)
+			if (node.right) traverse(node.right)
+			visited.push(node.val)
+		}
+
+		traverse(current)
+		return visited
+	}
+
+	InOrder() {
+		let visited = []
+		let current = this.root
+		
+		function traverse(node) {
+			if (node.left) traverse(node)
+			visited.push(node)
+			if (node.right) traverse(node)
+		}
+
+		traverse(current)
+		return visited
+	}
+
 }
 
 const tree = new BinarySearchTree()
