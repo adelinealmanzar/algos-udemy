@@ -425,6 +425,75 @@ class BinarySearchTree {
 		}
 		return found
 	}
+
+	BFS() {
+		let visited = []
+		let queue = []
+		let node = this.root
+
+		queue.push(node)
+
+		while (queue.length) {
+			node = queue.shift()
+			visited.push(node.val)
+			if (node.left) queue.push(node.left)
+			if (node.right) queue.push(node.right)
+		}
+
+		return visited
+	}
+
+	//DFS
+	preOrder() {
+		let visited = []
+		let current = this.root
+
+		function traverse(node) {
+			visited.push(node.val)
+			if (node.left) traverse(node.left)
+			if (node.right) traverse(node.right)
+		}
+		
+		traverse(current)
+		return visited
+	}
+
+	postOrder() {
+		let visited = []
+		let current = this.root
+
+		function traverse(node) {
+			if (node.left) traverse(node.left)
+			if (node.right) traverse(node.right)
+			visited.push(node.val)
+		}
+
+		traverse(current)
+		return visited
+	}
+
+	InOrder() {
+		let visited = []
+		let current = this.root
+		
+		function traverse(node) {
+			if (node.left) traverse(node)
+			visited.push(node)
+			if (node.right) traverse(node)
+		}
+
+		traverse(current)
+		return visited
+	}
+
 }
 
+const tree = new BinarySearchTree()
+tree.insert(10)
+tree.insert(6)
+tree.insert(15)
+tree.insert(3)
+tree.insert(8)
+tree.insert(20)
 
+console.log(tree.BFS())
