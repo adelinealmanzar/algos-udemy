@@ -559,3 +559,83 @@ class MaxBinaryHeap {
 		}
 	}
 }
+
+class PriorityNode {
+	constructor(val, priority) {
+		this.val = val
+		this.priority = priority
+	}
+}
+class PriorityQueue {
+	constructor() {
+		this.values = []
+	}
+
+	enqueue(val, priority) {
+		const newNode = new PriorityNode(val, priority)
+
+		this.values.push(newNode)
+		this.bubbleUp()
+	}
+
+	bubbleUp() {
+		let childIndex = this.values.length - 1
+		let child = this.values[childIndex]
+
+		while (true) {
+			let parentIndex = Math.floor((childIndex - 1)/2)
+			let parent = this.values[parentIndex]
+
+			if (parent.priority >= child.priority) break
+			this.values[parentIndex] = child
+			this.values[childIndex] = parent
+			
+			childIndex = parentIndex
+		}
+	}
+
+	dequeue() {
+		let min = this.values[0]
+		let end = this.values.pop()
+		// account for if array empty, do don't keep adding 1
+		if (this.values.length > 0) {
+			this.values[0] = end
+			this.sinkDown()
+		}
+
+		return min
+	}
+    // reverse logic for basically extracting min
+	sinkDown() {
+		let idx = 0
+		const length = this.values.length
+		const el = this.values[0]
+
+		while (true) {
+			let leftChildIdx = 2 * idx + 1
+			let rightChildIdx = 2 * idx + 2
+
+			let leftChild, rightChild
+			let swapIdx = null
+
+			// validate valid index
+			if (leftChildIdx < length) {
+				leftChild = this.values[leftChildIdx]
+				if (leftChild.priority < el) swapIdx = leftChildInx
+			}
+			if (rightChildIdx < length) {
+				rightChild = this.values[rightChildIdx]
+				// check if swap hasn't happened yet or if it has happened but right is bigger than left
+				if (
+					(swapIdx === null && rightChild.priority < el) || 
+					(swapIdx !== null && rightChild.priority < leftChild)
+				) swapIdx = rightChildIdx
+			}
+
+			if (swap === null) break // if swap didn't happen, get out of loop
+			this.values[idx] = this.values[swapIdx]
+			this.values[swapIdx] = el
+			idx = swapIdx //index to swap is swapped with previous root
+		}
+	}
+}
