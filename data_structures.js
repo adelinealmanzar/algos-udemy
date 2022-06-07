@@ -500,7 +500,7 @@ class MaxBinaryHeap {
 
 	bubbleUp() {
 		let childIndex = this.values.length - 1
-		let child = this[childIndex]
+		let child = this.values[childIndex]
 
 		while (true) {
 			let parentIndex = Math.floor((childIndex - 1)/2)
@@ -514,5 +514,3 @@ class MaxBinaryHeap {
 		}
 	}
 }
->>>>>>> Stashed changes
->>>>>>> 2f0c2f3 (feat: heap insert)
