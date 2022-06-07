@@ -513,4 +513,49 @@ class MaxBinaryHeap {
 			childIndex = parentIndex
 		}
 	}
+
+	extractMax() {
+		let max = this.values[0]
+		let end = this.values.pop()
+		// account for if array empty, do don't keep adding 1
+		if (this.values.length > 0) {
+			this.values[0] = end
+			this.sinkDown()
+		}
+
+		return max
+	}
+
+	sinkDown() {
+		let idx = 0
+		const length = this.values.length
+		const el = this.values[0]
+
+		while (true) {
+			let leftChildIdx = 2 * idx + 1
+			let rightChildIdx = 2 * idx + 2
+
+			let leftChild, rightChild
+			let swapIdx = null
+
+			// validate valid index
+			if (leftChildIdx < length) {
+				leftChild = this.values[leftChildIdx]
+				if (leftChild > el) swapIdx = leftChildInx
+			}
+			if (rightChildIdx < length) {
+				rightChild = this.values[rightChildIdx]
+				// check if swap hasn't happened yet or if it has happened but right is bigger than left
+				if (
+					(swapIdx === null && rightChild > el) || 
+					(swapIdx !== null && rightChild > leftChild)
+				) swapIdx = rightChildIdx
+			}
+
+			if (swap === null) break // if swap didn't happen, get out of loop
+			this.values[idx] = this.values[swapIdx]
+			this.values[swapIdx] = el
+			idx = swapIdx //index to swap is swapped with previous root
+		}
+	}
 }
