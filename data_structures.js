@@ -1,6 +1,7 @@
 // Singly Linked List
 
 const { isValidElement } = require("react/cjs/react.production.min")
+const { ThemeConsumer } = require("styled-components")
 
 class SinglySinglyNode {
 	constructor(val) {
@@ -487,13 +488,31 @@ class BinarySearchTree {
 	}
 
 }
+class MaxBinaryHeap {
+	constructor() {
+		this.values = []
+	}
 
-const tree = new BinarySearchTree()
-tree.insert(10)
-tree.insert(6)
-tree.insert(15)
-tree.insert(3)
-tree.insert(8)
-tree.insert(20)
+	insert(val) {
+		this.values.push(val)
+		this.bubbleUp()
+	}
 
-console.log(tree.BFS())
+	bubbleUp() {
+		let childIndex = this.values.length - 1
+		let child = this[childIndex]
+
+		while (true) {
+			let parentIndex = Math.floor((childIndex - 1)/2)
+			let parent = this.values[parentIndex]
+
+			if (parent >= child) break
+			this.values[parentIndex] = child
+			this.values[childIndex] = parent
+			
+			childIndex = parentIndex
+		}
+	}
+}
+>>>>>>> Stashed changes
+>>>>>>> 2f0c2f3 (feat: heap insert)
