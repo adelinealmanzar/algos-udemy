@@ -1,8 +1,5 @@
 // Singly Linked List
 
-const { isValidElement } = require("react/cjs/react.production.min")
-const { ThemeConsumer } = require("styled-components")
-
 class SinglySinglyNode {
 	constructor(val) {
 		this.val = val
@@ -710,5 +707,41 @@ class HashTable {
 		}
 		return valuesArr
 	}
-
 }
+
+class Graph {
+	constructor() {
+		this.adjacencyList = {}
+	}
+
+	addVertex(v) {
+		if (!this.adjacencyList[v]) this.adjacencyList[v] = []
+	}
+
+	addEdge(v1, v2) {
+		this.adjacencyList[v1].push(v2)
+		this.adjacencyList[v2].push(v1)
+	}
+
+	removeEdge(v1, v2) {
+		this.adjacencyList[v1] = this.adjacencyList[v1].filter( v => v !== v2)
+		this.adjacencyList[v2] = this.adjacencyList[v2].filter( v => v !== v1)
+	}
+
+	removeVertex(v) {
+		for (let v2 of this.adjacencyList[v]) {
+			this.removeEdge(v, v2)
+		}
+		delete this.adjacencyList[v]
+	}
+}
+
+let g = new Graph()
+g.addVertex('a')
+g.addVertex('b')
+g.addVertex('c')
+g.addEdge('a','b')
+g.addEdge('a','c')
+// g.removeEdge('a', 'c')
+g.removeVertex('c')
+console.log(g.adjacencyList)
