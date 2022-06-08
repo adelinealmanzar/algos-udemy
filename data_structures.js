@@ -640,14 +640,34 @@ class PriorityQueue {
 	}
 }
 
-// create a hash from a string
-function hash(key, arrLen) {
-	let total = 0
-	let random_prime = 31 // hash functions take advantage of prime numbers in order to spread uniformity or avoid collisions
-	for (let i = 0; i < Math.min(key.length, 100); i++) {
-		let char = key[i]
-		let value = char.charCodeAt(0) - 96
-		total = (total + value + random_prime) % arrLen
+class HashTable {
+	constructor(size = 53) {
+		this.keyMap = new Array(size)
 	}
-	return total
+
+	_hash(key) {
+		let total = 0
+		let random_prime = 31 // hash functions take advantage of prime numbers in order to spread uniformity or avoid collisions
+		for (let i = 0; i < Math.min(key.length, 100); i++) {
+			let char = key[i]
+			let value = char.charCodeAt(0) - 96
+			total = (total + value + random_prime) % this.keyMap.length
+		}
+		return total
+	}
+
+	set(key, value) {
+		let index = this._hash(key)
+		if (!this.keyMap[index]) {
+			this.keyMap[index] = []
+		}
+		this.keyMap[index].push([key, value])
+
+		return index
+	}
+
+	get(key) {
+
+	}
+
 }
