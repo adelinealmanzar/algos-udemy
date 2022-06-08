@@ -658,6 +658,7 @@ class HashTable {
 
 	set(key, value) {
 		let index = this._hash(key)
+		// search if the key already exists then push valuees into nested arrays
 		if (!this.keyMap[index]) {
 			this.keyMap[index] = []
 		}
@@ -668,15 +669,46 @@ class HashTable {
 
 	get(key) {
 		let index = this._hash(key)
+		// loop through nested keys if they exist
 		if (this.keyMap[index]) {
 			for (let i = 0; i < this.keyMap[index].length; i++) {
 				if (this.keyMap[index][i][0] === key) {
-					return this.keyMap[index][i][1]
+					return this.keyMap[index][i][1] // index of 1 is value
 				}
 
 			}
 		}
 		return undefined
+	}
+
+	keys() {
+		let keysArr = []
+		for (let i = 0; i < this.keyMap.length; i++) {
+			if (this.keyMap[i]) {
+				for (let j = 0; j < this.keyMap[i].length; j++) {
+					// to exclude duplicate values, only push if not already in valuesArr
+					if (!keysArr.includes(this.keyMap[i][j][0])) {
+						keyssArr.push(this.keyMap[i][j][0]) // keys at index 0
+					}
+				}
+			}
+		}
+		return keysArr
+	}
+
+	values() {
+		let valuesArr = []
+		for (let i = 0; i < this.keyMap.length; i++) {
+			if (this.keyMap[i]) {
+				for (let j = 0; j < this.keyMap[i].length; j++) {
+					// to exclude duplicate values, only push if not already in valuesArr
+					if (!valuesArr.includes(this.keyMap[i][j][1])) {
+						valuesArr.push(this.keyMap[i][j][1]) // values at index 1
+					}
+				}
+			}
+		}
+		return valuesArr
 	}
 
 }
