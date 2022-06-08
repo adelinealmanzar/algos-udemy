@@ -639,3 +639,15 @@ class PriorityQueue {
 		}
 	}
 }
+
+// create a hash from a string
+function hash(key, arrLen) {
+	let total = 0
+	let random_prime = 31 // hash functions take advantage of prime numbers in order to spread uniformity or avoid collisions
+	for (let i = 0; i < Math.min(key.length, 100); i++) {
+		let char = key[i]
+		let value = char.charCodeAt(0) - 96
+		total = (total + value + random_prime) % arrLen
+	}
+	return total
+}
