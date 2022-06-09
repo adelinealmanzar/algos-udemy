@@ -734,14 +734,44 @@ class Graph {
 		}
 		delete this.adjacencyList[v]
 	}
+
+	// recusive (uitlize call sack)
+	dftRecursion(start) {
+		let result = []
+		let visited = {}
+		const adjacencyList = this.adjacencyList // preserves this contex in outer function
+
+		function helper(v) {
+			if (!v) return null
+			visited[v] = true
+			result.push(v)
+			for (let n of adjacencyList[v]) {
+				if (!visited[n]) {
+					helper(n)
+				}
+			}
+		}
+		helper(start)
+
+		return result
+	}
+
 }
 
 let g = new Graph()
 g.addVertex('a')
 g.addVertex('b')
 g.addVertex('c')
+g.addVertex('d')
+g.addVertex('e')
+g.addVertex('f')
+
 g.addEdge('a','b')
 g.addEdge('a','c')
-// g.removeEdge('a', 'c')
-g.removeVertex('c')
-console.log(g.adjacencyList)
+g.addEdge('b','d')
+g.addEdge('c','e')
+g.addEdge('d','e')
+g.addEdge('d','f')
+g.addEdge('e','f')
+g.dft('a')
+console.log(g.dft('a'))
