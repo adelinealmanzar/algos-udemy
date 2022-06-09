@@ -734,14 +734,87 @@ class Graph {
 		}
 		delete this.adjacencyList[v]
 	}
+
+	// recursively utilize call stack
+	dftRecursion(start) {
+		let result = []
+		let visited = {}
+		const adjacencyList = this.adjacencyList // preserves this contex in outer function
+
+		function helper(v) {
+			if (!v) return null
+			visited[v] = true
+			result.push(v)
+			// working through beginning of adjencyList
+			for (let n of adjacencyList[v]) {
+				if (!visited[n]) {
+					helper(n)
+				}
+			}
+		}
+		helper(start)
+
+		return result
+	}
+
+	// iteratively utilize created stack
+	dftIteration(start) {
+		let s = [start]
+		let result = []
+		let visited = {}
+		let v
+
+		visited[start] = true
+		while (s.length) {
+			v = s.pop() // work through end of adjajencyList
+			result.push(v)
+
+			this.adjacencyList[v].forEach(n => {
+				if (!visited[n]) {
+					visited[n] = true
+					result.push(n)
+				}
+			})
+
+		}
+		return result
+	}
+
+	bfs(start) {
+		let queue = [start]
+		let result = []
+		let visited = {}
+		let v
+
+		visited[start] = true
+		while (queue.length) {
+			v = queue.shift() // remove from beginning
+			result.push(v)
+			this.adjacencyList[v].forEach(n => {
+				if (!visited[n]) {
+					visited[n] = true
+					queue.push(n)
+				}
+			})
+		}
+		return result
+	}
 }
 
 let g = new Graph()
 g.addVertex('a')
 g.addVertex('b')
 g.addVertex('c')
+g.addVertex('d')
+g.addVertex('e')
+g.addVertex('f')
+
 g.addEdge('a','b')
 g.addEdge('a','c')
-// g.removeEdge('a', 'c')
-g.removeVertex('c')
-console.log(g.adjacencyList)
+g.addEdge('b','d')
+g.addEdge('c','e')
+g.addEdge('d','e')
+g.addEdge('d','f')
+g.addEdge('e','f')
+// g.dft('a')
+console.log(g.bfs('a'))
