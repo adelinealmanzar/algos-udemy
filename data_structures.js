@@ -779,6 +779,26 @@ class Graph {
 		}
 		return result
 	}
+
+	bfs(start) {
+		let queue = [start]
+		let result = []
+		let visited = {}
+		let v
+
+		visited[start] = true
+		while (queue.length) {
+			v = queue.shift() // remove from beginning
+			result.push(v)
+			this.adjacencyList[v].forEach(n => {
+				if (!visited[n]) {
+					visited[n] = true
+					queue.push(n)
+				}
+			})
+		}
+		return result
+	}
 }
 
 let g = new Graph()
@@ -797,4 +817,4 @@ g.addEdge('d','e')
 g.addEdge('d','f')
 g.addEdge('e','f')
 // g.dft('a')
-console.log(g.dftIteration('a'))
+console.log(g.bfs('a'))
