@@ -735,7 +735,7 @@ class Graph {
 		delete this.adjacencyList[v]
 	}
 
-	// recusive (uitlize call sack)
+	// recursively utilize call stack
 	dftRecursion(start) {
 		let result = []
 		let visited = {}
@@ -745,6 +745,7 @@ class Graph {
 			if (!v) return null
 			visited[v] = true
 			result.push(v)
+			// working through beginning of adjencyList
 			for (let n of adjacencyList[v]) {
 				if (!visited[n]) {
 					helper(n)
@@ -756,6 +757,28 @@ class Graph {
 		return result
 	}
 
+	// iteratively utilize created stack
+	dftIteration(start) {
+		let s = [start]
+		let result = []
+		let visited = {}
+		let v
+
+		visited[start] = true
+		while (s.length) {
+			v = s.pop() // work through end of adjajencyList
+			result.push(v)
+
+			this.adjacencyList[v].forEach(n => {
+				if (!visited[n]) {
+					visited[n] = true
+					result.push(n)
+				}
+			})
+
+		}
+		return result
+	}
 }
 
 let g = new Graph()
@@ -773,5 +796,5 @@ g.addEdge('c','e')
 g.addEdge('d','e')
 g.addEdge('d','f')
 g.addEdge('e','f')
-g.dft('a')
-console.log(g.dft('a'))
+// g.dft('a')
+console.log(g.dftIteration('a'))
