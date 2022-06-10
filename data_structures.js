@@ -801,22 +801,9 @@ class Graph {
 	}
 }
 
-class WeightedGraph {
-	constructor() {
-		this.adjacencyList = {}
-	}
-	addVertex(v) {
-		if (!this.adjacencyList[v]) this.adjacencyList[v] = []
-	}
-	addEdge(v1, v2, weight) {
-		this.adjacencyList[v1].push({node: v2, weight})
-		this.adjacencyList[v2].push({node: v1, weight})
-	}
-}
-
 class DPriorityQueue {
 	constructor() {
-		this.adjacencyList = []
+		this.values = []
 	}
 	enqueue(val, priority) {
 		this.values.push({val, priority})
@@ -829,20 +816,94 @@ class DPriorityQueue {
 		this.values.sort((a, b) => a.priority - b.priority)
 	}
 }
+class WeightedGraph {
+	constructor() {
+		this.adjacencyList = {}
+	}
+	addVertex(v) {
+		if (!this.adjacencyList[v]) this.adjacencyList[v] = []
+	}
+	addEdge(v1, v2, weight) {
+		this.adjacencyList[v1].push({node: v2, weight})
+		this.adjacencyList[v2].push({node: v1, weight})
+	}
+
+	dijkstra(startV, endV) {
+		const priorityNodes = new DPriorityQueue()
+		const distances = {}
+		const previous = {}
+		let path = []
+		let smallest
+
+		// build initial state of distances, priorities, and previous
+		for (let v in this.adjacencyList) {
+			if (v === startV) {
+				distances[v] = 0
+				priorityNodes.enqueue(v, 0)
+			} else {
+				distances[v] = Infinity
+				priorityNodes.enqueue(v, Infinity)
+			}
+			previous[v] = null
+		}
+		
+		// as long as there is a node to visit
+		while (priorityNodes.values.length) {
+			smallest = priorityNodes.dequeue().val
+			if (smallest === endV) {
+				// done looping/we got to the end of our path
+				// build path to return at the end
+				while(previous[smallest]) {
+					path.push(smallest)
+					smallest = previous[smallest]
+				}
+				break // break out of outer while loop
+			}
+			if (smallest || distances[smallest] !== Infinity) {
+				for (let neighbor in this.adjacencyList[smallest]) {
+					// find next edge/next node after n
+					let nextNode = this.adjacencyList[smallest][neighbor]
+					// calculate distance to next node (distance to smallest node plus distance to next node)
+					let candidate = distances[smallest] + nextNode.weight
+					let nextNeighbor = nextNode.node
+					if (candidate < distances[nextNeighbor]) {
+						//update new smallest dist to neighbor
+						distances[nextNeighbor] = candidate
+						//updating how we got to neightbor
+						previous[nextNeighbor] = smallest
+						//enqueue in priority queue with new priority
+						priorityNodes.enqueue(nextNeighbor, candidate)
+					}
+				}
+			}
+
+		}
+
+		return path.concat(smallest).reverse()
+	}
+}
+
 
 let g = new WeightedGraph()
+// g.enqueue('a', 10)
+// g.enqueue('b', 9)
+// g.enqueue('c', 8)
+
 g.addVertex('a')
 g.addVertex('b')
-// g.addVertex('c')
-// g.addVertex('d')
-// g.addVertex('e')
-// g.addVertex('f')
+g.addVertex('c')
+g.addVertex('d')
+g.addVertex('e')
+g.addVertex('f')
 
-g.addEdge('a','b', 9)
-// g.addEdge('a','c')
-// g.addEdge('b','d')
-// g.addEdge('c','e')
-// g.addEdge('d','e')
-// g.addEdge('d','f')
-// g.addEdge('e','f')
-console.log(g.adjacencyList)
+g.addEdge('a','b', 4)
+g.addEdge('a','c', 2)
+g.addEdge('b','e', 3)
+g.addEdge('c','d', 2)
+g.addEdge('c','f', 4)
+g.addEdge('d','e', 3)
+g.addEdge('d','f', 1)
+g.addEdge('e','f', 1)
+
+console.log(g.dijkstra('a', 'e'))
+// console.log(g.values)
