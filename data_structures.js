@@ -814,6 +814,22 @@ class WeightedGraph {
 	}
 }
 
+class DPriorityQueue {
+	constructor() {
+		this.adjacencyList = []
+	}
+	enqueue(val, priority) {
+		this.values.push({val, priority})
+		this.sort()
+	}
+	dequeue() {
+		return this.values.shift()
+	}
+	sort() {
+		this.values.sort((a, b) => a.priority - b.priority)
+	}
+}
+
 let g = new WeightedGraph()
 g.addVertex('a')
 g.addVertex('b')
