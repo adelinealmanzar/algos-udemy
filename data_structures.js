@@ -801,20 +801,32 @@ class Graph {
 	}
 }
 
-let g = new Graph()
+class WeightedGraph {
+	constructor() {
+		this.adjacencyList = {}
+	}
+	addVertex(v) {
+		if (!this.adjacencyList[v]) this.adjacencyList[v] = []
+	}
+	addEdge(v1, v2, weight) {
+		this.adjacencyList[v1].push({node: v2, weight})
+		this.adjacencyList[v2].push({node: v1, weight})
+	}
+}
+
+let g = new WeightedGraph()
 g.addVertex('a')
 g.addVertex('b')
-g.addVertex('c')
-g.addVertex('d')
-g.addVertex('e')
-g.addVertex('f')
+// g.addVertex('c')
+// g.addVertex('d')
+// g.addVertex('e')
+// g.addVertex('f')
 
-g.addEdge('a','b')
-g.addEdge('a','c')
-g.addEdge('b','d')
-g.addEdge('c','e')
-g.addEdge('d','e')
-g.addEdge('d','f')
-g.addEdge('e','f')
-// g.dft('a')
-console.log(g.bfs('a'))
+g.addEdge('a','b', 9)
+// g.addEdge('a','c')
+// g.addEdge('b','d')
+// g.addEdge('c','e')
+// g.addEdge('d','e')
+// g.addEdge('d','f')
+// g.addEdge('e','f')
+console.log(g.adjacencyList)
